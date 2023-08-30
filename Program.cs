@@ -1,3 +1,8 @@
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using CafeteriaService.Controllers;
+using CafeteriaService.Models;
+
 namespace CafeteriaService
 {
     internal static class Program
@@ -11,7 +16,7 @@ namespace CafeteriaService
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new ManagerApplication());
+            Application.Run(new LoginForm());
         }
     }
 }
