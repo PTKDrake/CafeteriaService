@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CafeteriaService.Models
 {
     [Table("Items")]
-    public class Item
+    public class Item: BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
@@ -21,10 +21,11 @@ namespace CafeteriaService.Models
         public int InStock { get; set; } = 0;
 
         [Required]
+        [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; }
-
-        public virtual ICollection<Category> Categories { get; set; }
-
-        public virtual ICollection<Image>? Images { get; set; }
+        [Required]
+        public string? ImagePath { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

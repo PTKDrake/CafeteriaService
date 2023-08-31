@@ -15,7 +15,7 @@ namespace CafeteriaService.Controllers
         public string ResetPassword(User user)
         {
             string password = GeneratePassword(20);
-            user.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(password, 20);
+            user.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(password);
             _context.SaveChanges();
             return password;
         }
@@ -41,9 +41,10 @@ namespace CafeteriaService.Controllers
             User? user = _context.Users.SingleOrDefault(i => i.Id == id);
             if (user == null) throw new Exception("User not found!");
             user.Username = username ?? user.Username;
-            if (password != null) user.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(password, 20);
+            if (password != null) user.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(password);
             user.Role = role ?? user.Role;
             user.Permissions = permissions ?? new List<Permission>();
+            _context.Users.Update(user);
             _context.SaveChanges();
             return user;
         }
@@ -53,7 +54,7 @@ namespace CafeteriaService.Controllers
             User user = new User
             {
                 Username = username,
-                Password = BCrypt.Net.BCrypt.EnhancedHashPassword(password, 20),
+                Password = BCrypt.Net.BCrypt.EnhancedHashPassword(password),
                 Role = role,
                 Permissions = permissions ?? new List<Permission>()
             };

@@ -25,6 +25,7 @@ namespace CafeteriaService.Controllers
                 {
                     category.Name = name;
                     category.Description = description;
+                    _context.Categories.Update(category);
                 }
             }
             if(category == null){
@@ -44,6 +45,11 @@ namespace CafeteriaService.Controllers
         {
             _context.Categories.Remove(category);
             _context.SaveChanges();
+        }
+
+        public Category? GetCategory(string name)
+        {
+            return _context.Categories.FirstOrDefault(c => c.Name == name);
         }
 
         public Category? GetCategory(int id)

@@ -1,4 +1,9 @@
-﻿namespace CafeteriaService
+﻿using Color = System.Drawing.Color;
+using Point = System.Drawing.Point;
+using Size = System.Drawing.Size;
+using SizeF = System.Drawing.SizeF;
+
+namespace CafeteriaService
 {
     partial class LoginForm
     {
@@ -80,21 +85,22 @@
             loginButton.Name = "loginButton";
             loginButton.NoAccentTextColor = Color.Empty;
             loginButton.Size = new Size(64, 36);
-            loginButton.TabIndex = 2;
+            loginButton.TabIndex = 3;
             loginButton.Text = "Login";
             loginButton.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             loginButton.UseAccentColor = false;
             loginButton.UseVisualStyleBackColor = true;
+            loginButton.Click += loginButton_Click;
             // 
             // passwordInput
             // 
-            passwordInput.BackColor = Color.SaddleBrown;
+            passwordInput.BackColor = Color.Salmon;
             passwordInput.BaseColor = Color.Transparent;
             passwordInput.BorderColorA = Color.DodgerBlue;
             passwordInput.BorderColorB = Color.DarkGray;
             passwordInput.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             passwordInput.ForeColor = Color.Gainsboro;
-            passwordInput.Hint = "";
+            passwordInput.Hint = "Password";
             passwordInput.Location = new Point(4, 220);
             passwordInput.MaxLength = 50;
             passwordInput.Multiline = false;
@@ -105,22 +111,20 @@
             passwordInput.SelectionLength = 0;
             passwordInput.SelectionStart = 0;
             passwordInput.Size = new Size(256, 38);
-            passwordInput.TabIndex = 1;
+            passwordInput.TabIndex = 2;
             passwordInput.TabStop = false;
-            passwordInput.Text = "Password";
-            passwordInput.UseSystemPasswordChar = false;
-            passwordInput.Enter += passwordInput_Enter;
-            passwordInput.Leave += passwordInput_Leave;
+            passwordInput.Text = "123@123";
+            passwordInput.UseSystemPasswordChar = true;
             // 
             // usernameInput
             // 
-            usernameInput.BackColor = Color.SaddleBrown;
+            usernameInput.BackColor = Color.Salmon;
             usernameInput.BaseColor = Color.Transparent;
             usernameInput.BorderColorA = Color.DodgerBlue;
             usernameInput.BorderColorB = Color.DarkGray;
             usernameInput.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             usernameInput.ForeColor = Color.Gainsboro;
-            usernameInput.Hint = "";
+            usernameInput.Hint = "Username";
             usernameInput.Location = new Point(4, 161);
             usernameInput.MaxLength = 50;
             usernameInput.Multiline = false;
@@ -133,10 +137,8 @@
             usernameInput.Size = new Size(256, 38);
             usernameInput.TabIndex = 1;
             usernameInput.TabStop = false;
-            usernameInput.Text = "Username";
+            usernameInput.Text = "ptkdrake";
             usernameInput.UseSystemPasswordChar = false;
-            usernameInput.Enter += usernameInput_Enter;
-            usernameInput.Leave += usernameInput_Leave;
             // 
             // panel2
             // 

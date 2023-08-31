@@ -5,38 +5,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CafeteriaService.Models
 {
     [Table("Orders")]
-    public class Order
+    public class Order: BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
         public int Id { get; set; }
 
         [Required]
-        [Timestamp]
-        public byte[] PlacedTime { get; set; }
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal TotalPrice => (from orderDetails in OrderLines select orderDetails.Price).Sum();
 
         [Required]
-        public decimal TotalPrice
-        {
-            get
-            {
-                return (from orderDetails in OrderLines select orderDetails.Price).Sum();
-            }
-        }
-
-        [Required]
+        [Column(TypeName = "decimal(18,4)")]
         public decimal TotalPaid { get; set; }
 
         [DefaultValue(0)]
-        public decimal Change
-        {
-            get
-            {
-                return TotalPaid - TotalPrice;
-            }
-        }
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal Change => TotalPaid - TotalPrice;
 
-        public virtual ICollection<OrderDetail> OrderLines { get; set; } = new List<OrderDetail>();
+        public ICollection<OrderDetail> OrderLines { get; set; } = new List<OrderDetail>();
 
         public ICollection<OrderDetail> AddOrderDetail(OrderDetail[] orderDetails)
         {

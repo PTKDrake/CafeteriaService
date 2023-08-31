@@ -18,24 +18,24 @@ namespace CafeteriaService
             InitializeComponent();
         }
 
-        private void usernameInput_Enter(object sender, EventArgs e)
+        private void loginButton_Click(object sender, EventArgs e)
         {
-            if (usernameInput.Text == "Username") usernameInput.Text = "";
-        }
-
-        private void usernameInput_Leave(object sender, EventArgs e)
-        {
-            if (usernameInput.Text == "") usernameInput.Text = "Username";
-        }
-
-        private void passwordInput_Enter(object sender, EventArgs e)
-        {
-            if (passwordInput.Text == "Password") passwordInput.Text = "";
-        }
-
-        private void passwordInput_Leave(object sender, EventArgs e)
-        {
-            if (passwordInput.Text == "") passwordInput.Text = "Password";
+            string username = usernameInput.Text;
+            string password = passwordInput.Text;
+            if (username.Length > 0 && password.Length > 0)
+            {
+                if (Program.UserController.Login(username, password))
+                {
+                    this.Hide();
+                    Program.ManagerForm.ShowDialog();
+                    this.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Hãy kiểm tra lại thông tin đăng nhập", "Thông tin đăng nhập sai",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

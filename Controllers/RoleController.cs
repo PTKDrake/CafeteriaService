@@ -32,6 +32,7 @@ namespace CafeteriaService.Controllers
             if (role == null) throw new Exception("Role not found!");
             role.Name = name ?? role.Name;
             role.Permissions = permissions ?? new List<Permission>();
+            _context.Roles.Update(role);
             _context.SaveChanges();
             return role;
         }

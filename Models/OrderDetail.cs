@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CafeteriaService.Models
 {
     [Table("OrderDetails")]
-    public class OrderDetail
+    public class OrderDetail: BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
@@ -22,7 +22,7 @@ namespace CafeteriaService.Models
 
         public Item Item { get; set; }
 
-        [NotMapped]
+        [Column(TypeName = "decimal(18,4)")]
         public decimal Price
         {
             get

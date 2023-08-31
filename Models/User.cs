@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace CafeteriaService.Models
 {
     [Table("Users")]
-    public class User
+    [Index(nameof(Username), IsUnique = true)]
+    public class User: BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
@@ -12,11 +14,10 @@ namespace CafeteriaService.Models
 
         [Required]
         [StringLength(50)]
-        [Index(IsUnique = true)]
         public string Username { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(500)]
         public string Password { get; set; }
 
         public virtual Role Role { get; set; }

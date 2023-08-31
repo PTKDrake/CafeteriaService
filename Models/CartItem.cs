@@ -10,9 +10,8 @@ namespace CafeteriaService.Models
 {
     public class CartItem
     {
-        public int Id { get; set; }
         public Item Item { get; set; }
         public int Amount { get; set; }
-        public int CardId { get; set; }
+        public Cart Cart { get; set; }
     }
 }

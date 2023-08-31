@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace CafeteriaService.Models
 {
     [Table("Roles")]
-    public class Role
+    [Index(nameof(Name), IsUnique = true)]
+    public class Role: BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
@@ -12,7 +14,6 @@ namespace CafeteriaService.Models
 
         [Required]
         [StringLength(20)]
-        [Index(IsUnique = true)]
         public string Name { get; set; }
 
         public virtual ICollection<Permission> Permissions { get; set; } = new List<Permission>();

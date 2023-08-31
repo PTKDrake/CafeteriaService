@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace CafeteriaService.Models
 {
     [Table("Categories")]
-    public class Category
+    [Index(nameof(Name), IsUnique = true)]
+    public class Category: BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
@@ -17,11 +19,6 @@ namespace CafeteriaService.Models
         [StringLength(100)]
         public string? Description { get; set; }
 
-        public virtual ICollection<Item> Items { get; set; }
-
-        public Category()
-        {
-            this.Items = new HashSet<Item>();
-        }
+        public ICollection<Item> Items { get; set; } = new List<Item>();
     }
 }

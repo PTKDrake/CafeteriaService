@@ -16,13 +16,13 @@ namespace CafeteriaService.Controllers
             _context = context;
         }
 
-        public Order CreateOrder(decimal totalPaid, List<OrderDetail> orderLines)
+        public Order CreateOrder(decimal totalPaid, List<OrderDetail>? orderLines = null)
         {
-            decimal totalPrice = (from orderDetails in orderLines select orderDetails.Price).Sum();
+            decimal totalPrice = orderLines != null ? (from orderDetails in orderLines select orderDetails.Price).Sum() : 0;
             Order order = new Order
             {
                 TotalPaid = totalPaid,
-                OrderLines = orderLines
+                OrderLines = orderLines ?? new List<OrderDetail>()
             };
             _context.Orders.Add(order);
             _context.SaveChanges();

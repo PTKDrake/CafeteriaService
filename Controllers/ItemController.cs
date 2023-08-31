@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CafeteriaService.Models;
-using Image = CafeteriaService.Models.Image;
 
 namespace CafeteriaService.Controllers
 {
@@ -17,42 +16,42 @@ namespace CafeteriaService.Controllers
             _context = context;
         }
 
-        public Item SaveItem(string? name, List<Category>? categories, decimal? price, string? description, int? inStock,
-            List<Image>? images, int? id)
+        public Item SaveItem(string? name, Category? category, decimal? price, string? description, int? inStock,
+            string? imagePath, int? id)
         {
             if (id != null)
-                return SaveItem((int)id, name, categories, price, description, inStock, images);
-            if (name != null && categories != null && price != null && description != null && inStock != null)
-                return SaveItem(name, categories, (decimal)price, description, (int)inStock, images);
+                return SaveItem((int)id, name, category, price, description, inStock, imagePath);
+            if (name != null && category != null && price != null && description != null && inStock != null)
+                return SaveItem(name, category, (decimal)price, description, (int)inStock, imagePath);
             throw new Exception("Invalid parameters!");
         }
 
-        public Item SaveItem(int id, string? name = null, List<Category>? categories = null, decimal? price = null, string? description = null,
-            int? inStock = null, List<Image>? images = null)
+        public Item SaveItem(int id, string? name = null, Category? category = null, decimal? price = null, string? description = null,
+            int? inStock = null, string? imagePath = null)
         {
             Item? item = _context.Items.SingleOrDefault(i => i.Id == id);
             if (item == null) throw new Exception("Item not found!");
             item.Name = name ?? item.Name;
-            item.Categories = categories ?? item.Categories;
+            item.Category = category ?? item.Category;
             item.Price = price ?? item.Price;
             item.Description = description ?? item.Description;
             item.InStock = inStock ?? item.InStock;
-            item.Images = images ?? item.Images;
+            item.ImagePath = imagePath ?? item.ImagePath;
+            _context.Items.Update(item);
             _context.SaveChanges();
             return item;
         }
 
-        public Item SaveItem(string name, List<Category> categories, decimal price, string description = "", int inStock = 0,
-            List<Image>? images = null)
+        public Item SaveItem(string name, Category category, decimal price, string description = "", int inStock = 0, string? imagePath = null)
         {
             Item item = new Item
             {
                 Name = name,
-                Categories = categories,
+                Category = category,
                 Price = price,
                 Description = description,
                 InStock = inStock,
-                Images = images
+                ImagePath = imagePath
             };
             _context.Items.Add(item);
             _context.SaveChanges();

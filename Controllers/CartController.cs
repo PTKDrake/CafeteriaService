@@ -18,7 +18,7 @@ namespace CafeteriaService.Controllers
 
         public Cart CreateCart(List<CartItem>? cartItems = null)
         {
-            Cart cart = new Cart(_context)
+            Cart cart = new Cart()
             {
                 CartItems = cartItems ?? new List<CartItem>()
             };
